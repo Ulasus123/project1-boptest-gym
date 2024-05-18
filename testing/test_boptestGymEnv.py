@@ -4,14 +4,17 @@ The BOPTEST bestest_hydronic_heat_pump case needs to be deployed to perform
 the tests. Latest tests were passing with BOPTEST v0.4.0-dev
 
 '''
-
+import sys
+sys.path.insert(0,'C:\\Users\\filiz\\OneDrive\\Masaüstü\\Transfer learning\\BOPTest gym environment\\project1-boptest-gym\\examples')
+for each in sys.path:
+    print(each) 
 import unittest
 import os
 import sys
 import pandas as pd
 import random
 import shutil
-from testing import utilities
+import utilities
 from examples import run_baseline, run_sample, run_save_callback,\
     run_variable_episode, run_vectorized, train_RL
 from collections import OrderedDict

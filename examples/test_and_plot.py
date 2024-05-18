@@ -4,7 +4,7 @@ Common functionality to test and plot an agent
 '''
 
 import matplotlib.pyplot as plt
-from scipy import interpolate
+import scipy
 from gymnasium.core import Wrapper
 import matplotlib.dates as mdates
 import numpy as np
@@ -99,7 +99,7 @@ def plot_results(env, rewards, points=['reaTZon_y','reaTSetHea_y','reaTSetCoo_y'
     rewards_time_days = np.arange(df['time'][0], 
                                   env.start_time+env.max_episode_length,
                                   env.step_period)/3600./24.
-    f = interpolate.interp1d(rewards_time_days, rewards, kind='zero',
+    f = scipy.interpolate.interp1d(rewards_time_days, rewards, kind='zero',
                              fill_value='extrapolate')
     res_time_days = np.array(df['time'])/3600./24.
     rewards_reindexed = f(res_time_days)

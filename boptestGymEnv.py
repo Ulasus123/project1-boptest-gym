@@ -14,9 +14,9 @@ import pandas as pd
 import inspect
 import json
 import os
-
+import scipy
 from collections import OrderedDict
-from scipy import interpolate
+
 from pprint import pformat
 from gymnasium import spaces
 from stable_baselines3.common.env_checker import check_env
@@ -36,7 +36,7 @@ class BoptestGymEnv(gym.Env):
     metadata = {'render.modes': ['console']}
 
     def __init__(self, 
-                 url                = 'http://127.0.0.1:5000',
+                 url                = 'https://api.boptest.net',
                  actions            = ['oveHeaPumY_u'],
                  observations       = {'reaTZon_y':(280.,310.)}, 
                  reward             = ['reward'],
@@ -725,7 +725,7 @@ class BoptestGymEnv(gym.Env):
                 # regr_index[-1] and regr_index[0] but shorter. In these cases
                 # we extrapolate linearly to reach the desired value at the extreme
                 # of the regression period.                              
-                f = interpolate.interp1d(res_var['time'],
+                f = scipy.interpolate.interp1d(res_var['time'],
                     res_var[var], kind='linear', fill_value='extrapolate') 
                 res_var_reindexed = f(regr_index)
                 observations.extend(list(res_var_reindexed))
